@@ -6,6 +6,7 @@
         public static List<string> ObjetTrouver = new List<string>();
         public static int NombreInitialDePointDeVie = 3;
         public static string? ReponseAUser;
+        public static int QuestionCounter = 0;
 
         /* Tout les questions ici avec reponse et objet trouver */
          public static List<Question> Questions = new List<Question>()
@@ -18,7 +19,7 @@
                         "Une boîte"
                  },
                  "Un oeuf",
-                 "une cafe"),
+                 "un cafe"),
                  new Question(
                  "J’ai des clés mais je n’ouvre aucune serrure. Qui suis-je ?",
 
@@ -35,7 +36,7 @@
                   new List<string>() {
                         "Un trou.",
                         "Un chien",
-                        "Une enfant"
+                        "Un enfant"
                   },
                  "Un chien",
                  "une maison"),
@@ -46,14 +47,14 @@
                         "Sangoku",
                         "Loffi"
                   },
-                 "Naruto (bonne réponse)",
+                 "Naruto",
                  "une pomme de france"),
                   new Question(
                  "Même si je suis loin, mon coeur reste avec toi ?",
                   new List<string>() {
                         "Minato Namikaze",
                         "Kushina Uzumaki",
-                        "Itach Uchiha (bonne réponse)"
+                        "Itach Uchiha"
                   },
                  "tach Uchiha",
                  "une tele"),
@@ -114,6 +115,7 @@
             do
             {
                 ManuelUser();
+                // RandomNumber();
                 Console.WriteLine("Entrer L'option ici [ A, B, Q ] :".ToUpper());
                 GlobalChoixUser = Console.ReadLine();
 
@@ -124,9 +126,11 @@
                         ResolutionEnigmes();
                         break;
                     case "B":
+                    case "b":
                         TousLesObjetsTrouver(ObjetTrouver);
                         break;
                     case "Q":
+                    case "q":
                         ContinueALancer = false;
                         break;
                     default:
@@ -156,11 +160,13 @@
             do
             {
                 Index = Index + 1;
-                var radomize = random.Next(0, Index);
+                var radomize = random.Next(0, Questions.Count());
+                Console.WriteLine("MY NEW RANDOM IS " + radomize);
                 //Console.WriteLine(Index);
                 //Console.WriteLine(radomize);
                 var question = Questions[radomize].QuestionName;
                 Console.WriteLine(question);
+                QuestionCounter = QuestionCounter + 1;
                 /*  --- possibilities abswers ----  */
                 var Reponses = Questions[radomize].Answers;
 
@@ -170,19 +176,23 @@
                     Console.WriteLine($"[* {Reponses[i]} *]");
                     // StateReponse = Reponses[i];
                 }
+                // Console.WriteLine("Numnber of questions " + Questions.Count());
+                // Console.WriteLine("Current Question " + QuestionCounter);
                 ReponseAUser =  Console.ReadLine();
 
 
                 
                 if (ReponseAUser?.ToLower() == Questions[radomize].CorrectAnswers.ToLower())
                 {
-                   /* Console.WriteLine(" Voici ton Objet ici " +Questions[radomize].Objets); */
-                   /* Je pense que ici est claire, j'ajoute lobjet trouver dans le pagner */
+                //    Console.WriteLine(" Voici ton Objet ici " +Questions[radomize].Objets);
+                //    Je pense que ici est claire, j'ajoute lobjet trouver dans le pagner 
+                   Console.WriteLine("Success | Bonne Reponse |");
                    ObjetTrouver.Add(Questions[radomize].Objets);
                 }
                 else
                 {
                     NombreInitialDePointDeVie--;
+                    Console.WriteLine("**Erreur | Mauvaise Reponse |");
 
                 }
 
@@ -197,6 +207,18 @@
                     
                 }
 
+                if(QuestionCounter >= Questions.Count() )
+                {
+                    
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" **JEUX TERMINER** "); 
+                    Console.WriteLine($"Vous avez un score de ({QuestionCounter} / {Questions.Count()}) ");
+                    NombreInitialDePointDeVie = 3;
+                    Console.WriteLine(" ");
+                    return;
+                    
+                }
+
                 
 
             } while ( Index < Questions.Count() && NombreInitialDePointDeVie != 0);
@@ -204,10 +226,13 @@
 
         }
 
-        public static void Inventaire()
-        {
+        // public static void RandomNumber()
+        // {
+        //     Random randoms = new Random();
+        //     var ran = randoms.Next(0, 10);
+        //     Console.WriteLine(ran);
 
-        }
+        // }
 
         public static void ManuelUser()
         {
@@ -221,6 +246,7 @@
 
     public static void TousLesObjetsTrouver(List<string> ObjetsTrouver)
     {
+        Console.WriteLine(" ");
         if(ObjetsTrouver.Count != 0)
         {
             Console.WriteLine($" Voici vos objets: tota: |{ObjetsTrouver.Count()}|  ".ToUpper());
@@ -235,6 +261,7 @@
 
         }
 
+        Console.WriteLine(" ");
         
     }
     }

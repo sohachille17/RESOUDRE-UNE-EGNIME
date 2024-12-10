@@ -12,3 +12,4 @@ D:\tp_3\obj\Debug\net9.0\refint\tp_3.dll
 D:\tp_3\obj\Debug\net9.0\tp_3.pdb
 D:\tp_3\obj\Debug\net9.0\tp_3.genruntimeconfig.cache
 D:\tp_3\obj\Debug\net9.0\ref\tp_3.dll
+D:\tp_3\obj\Debug\net9.0\tp_3.sourcelink.json
